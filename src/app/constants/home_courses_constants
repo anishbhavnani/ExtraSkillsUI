@@ -1,0 +1,27 @@
+export const COURSES: any[] =
+[
+  {
+    name: 'Earl of Lemongrab',
+    imageurl: '/assets/img/home/child.jpg',
+    rate: '500',
+    description: 'Earl, Heir to the Candy Kingdom Throne'
+  },
+  {
+    name: 'Bonnibel Bubblegum',
+    imageurl: '/assets/img/home/child.jpg',
+    rate: '300',
+    description: 'Returned Ruler of the Candy Kingdom'
+  },
+  {
+    name: 'Phoebe',
+    imageurl: '/assets/img/home/child.jpg',
+    rate: '200',
+    description: 'Ruler of the Fire Kingdom'
+  },
+  {
+    name: 'Lumpy Space Princess',
+    imageurl: '/assets/img/home/child.jpg',
+    rate: '100', 
+    description: 'Babysitter'
+  },
+]

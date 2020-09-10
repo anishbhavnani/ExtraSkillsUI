@@ -1,0 +1,119 @@
+.row > .col-md-4:hover
+ {
+ box-shadow: #888888;   
+  background-color: #fff;  
+  -moz-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);;
+  -o-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);
+  border-radius:5px;
+}
+
+.col1{
+  background-color: #fff;  
+  border-color: #000000;
+  border-radius:5px;
+  border-style: solid;
+  border-width: 1px; 
+  margin-left: 2em;     
+}
+
+.showmore {
+	border-radius: 50%;
+	background-color : #40c4ff !important;
+	color: #ffff;
+    border-color: #40c4ff;
+    display: inline-block;
+  position: relative;  
+}
+
+.courseheading{
+	font-weight: bold;
+	font-size: 25px	;
+}
+
+.fees{
+	color : #40c4ff !important;
+		font-weight: bold;
+	font-size: 15px	;
+}
+
+.courseimg{
+	padding-top: 25px;
+}
+
+.hidden {
+     display:none;
+}
+
+.register {
+	background-color : #40c4ff !important;
+	color: #ffff;
+	font-size: 30px;
+    border-color: #40c4ff;
+    display: inline-block;
+  	position: relative; 
+  	box-shadow: #888888;    
+  	-moz-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);;
+  -o-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);
+}
+
+.apply {
+  background-color : #40c4ff !important;
+  color: #ffff;
+  font-size: 20px;
+    border-color: #40c4ff;  
+    position: relative; 
+    box-shadow: #888888;  
+    margin-left: 10px;
+      -moz-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);;
+  -o-box-shadow: 0px 0px 5px 1px rgba(0.6,0.6,0.6,0.6);
+
+
+}
+
+.stepsheading{
+ background-color : #40c4ff !important;
+  color: #ffff;  
+    border-color: #40c4ff;       
+}
+
+.tutor {
+  position: relative;
+  height: auto;
+  background-color: #40c4ff !important;  
+}
+
+button:hover { 
+  background-color: white !important; 
+  color: #40c4ff;
+} 
+    
+
+
+@media (max-width: 992px) {
+
+  button:hover { 
+  background-color: white !important; 
+  color: #40c4ff;
+} 
+    
+
+  .mobileslide{
+    margin-top: 60px !important;
+  }
+
+  .tutorimg{
+    display: none;
+  }
+
+  .tutordesc{
+    text-align: left;
+    padding-left: 1em;
+  }
+
+  .apply{
+    margin-top: 10px;
+  }
+  }
