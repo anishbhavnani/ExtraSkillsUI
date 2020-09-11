@@ -11,6 +11,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     routing,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    MDBBootstrapModule.forRoot(),
+    FormsModule
   ],
   providers: [ApiService, {provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
