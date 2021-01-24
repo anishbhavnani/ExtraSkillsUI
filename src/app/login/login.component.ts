@@ -8,23 +8,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { AppComponent }  from '../app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogModule } from '@angular/material/dialog';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
-
-export interface DialogData {
- firstName: string;
- lastName: string;
-}
-
+import { AuthenticationService } from '../service/authentication.service';
 
 @NgModule({
 declarations: [
-    AppComponent,
-    MatDialogModule
+    AppComponent    
     ],
-imports: [
-          BrowserModule,
+imports: [          
     ReactiveFormsModule,
     AngularFontAwesomeModule,
     MDBBootstrapModule.forRoot(),
@@ -38,41 +29,49 @@ imports: [
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit {  
+  invalidLogin = false
+   form: FormGroup;                    // {1}
+  private formSubmitAttempt: boolean; // {2}
 
-  loginForm: FormGroup;
-  invalidLogin: boolean = false;
-
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService,public dialogRef: MatDialogRef<LoginComponent>,
- @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onSubmit() {
-    if (this.loginForm.invalid) {
-      return;
-    }
-    const loginPayload = {
-      username: this.loginForm.controls.username.value,
-      password: this.loginForm.controls.password.value
-    }
-    this.apiService.login(loginPayload).subscribe(data => {
-      if(data.status === 200) {
-        window.localStorage.setItem('token', data.result.token);
-        this.router.navigate(['list-user']);
-      }else {
-        this.invalidLogin = true;
-        alert(data.message);
-      }
-    });
-  }
+  constructor(
+    private fb: FormBuilder,   
+    public loginService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    window.localStorage.removeItem('token');
-    this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+    this.form = this.fb.group({     // {5}
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
-  get input() { return this.loginForm.controls; }
+get f() { return this.form.controls; }
 
+  isFieldInvalid(field: string) { // {6}
+    return (
+      (!this.form.get(field).valid && this.form.get(field).touched) ||
+      (this.form.get(field).untouched && this.formSubmitAttempt)
+    );
+  }
+
+  checkLogin() {
+    if (this.form.valid) {
+      //this.authService.login(this.form.value); // {7}
+
+      this.loginService.authenticate(this.f.username.value, this.f.password.value)
+        this.router.navigate(['home'])
+        this.invalidLogin = false
+    }else
+      this.invalidLogin = true
+    this.formSubmitAttempt = true;             // {8}
+  }
+    /*checkLogin(){   
+      if (this.loginservice.authenticate(this.username, this.password)) {
+        this.router.navigate([''])
+        this.invalidLogin = false
+    } else
+        this.invalidLogin = true
+    }*/
 }

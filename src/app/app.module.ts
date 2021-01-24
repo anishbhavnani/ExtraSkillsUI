@@ -16,8 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { ParentsregisterComponent } from './parentsregister/parentsregister.component';
-
-
+import { LogoutComponent } from './logout/logout.component';
+import { AppMaterialModule } from './app-material/app-material.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { ParentsregisterComponent } from './parentsregister/parentsregister.comp
     HeaderComponent,
     LoginComponent,
     DialogComponent,
-    ParentsregisterComponent
+    ParentsregisterComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,8 @@ import { ParentsregisterComponent } from './parentsregister/parentsregister.comp
     AngularFontAwesomeModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppMaterialModule
   ],
 entryComponents: [HeaderComponent,LoginComponent ],
   providers: [ApiService, {provide: HTTP_INTERCEPTORS,
