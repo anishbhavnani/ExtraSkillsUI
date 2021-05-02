@@ -8,24 +8,34 @@
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-signin" role="tabpanel" aria-labelledby="pills-signin-tab">
         <div class="col-sm-12 border border-primary shadow rounded pt-2">          
-          <form [formGroup]="form" (ngSubmit)="checkLogin()" class="text-center p-5">          
+          <form [formGroup]="loginForm" (ngSubmit)="checkLogin()" class="text-center p-5">          
             <div class="form-group text-left">
               <label class="font-weight-bold">Email <span class="text-danger">*</span></label>
-              <input type="email" formControlName="username" name="email" id="email" class="form-control" placeholder="Enter valid email" required>
+              <input type="email" formControlName="email" name="email" id="email" class="form-control" placeholder="Enter valid email" 
+              [ngClass]="{ 'is-invalid': formSubmitAttempt && f.email.errors }"
+              required>
 
-	          <mat-error *ngIf="isFieldInvalid('username')">
+<!-- 	          <mat-error *ngIf="isFieldInvalid('email')">
 	            Enter valid email
 	          </mat-error>
+ -->
+ 			<div *ngIf="formSubmitAttempt && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required"> Email is required</div>
+            </div>
 
             </div>
             <div class="form-group text-left">
               <label class="font-weight-bold">Password <span class="text-danger">*</span></label>
-              <input type="password" name="password" id="password" formControlName="password" class="form-control" placeholder="***********" required>
+              <input type="password" name="password" id="password" formControlName="password" class="form-control" placeholder="***********" required
+              [ngClass]="{ 'is-invalid': formSubmitAttempt && f.password.errors }">
 
-            <mat-error *ngIf="isFieldInvalid('password')">
+          <!--   <mat-error *ngIf="isFieldInvalid('password')">
 	            Enter password
-    	      </mat-error>
+    	      </mat-error> -->
 
+			<div *ngIf="formSubmitAttempt && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required"> Password is required</div>
+            </div>
             </div>
             
             <div class="form-group text-left">
@@ -51,32 +61,75 @@
       <div class="tab-pane fade" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
         <div class="col-sm-12 border border-primary shadow rounded pt-2">
 
-          <form method="post" id="singnupFrom">
+          <form method="post" id="registerForm"  [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <label class="font-weight-bold">Email <span class="text-danger">*</span></label>
-              <input type="email" name="signupemail" id="signupemail" class="form-control" placeholder="Enter valid email" required>
+              <input type="email" name="signupemail" formControlName="email" id="signupemail" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && fc.email.errors }" required>
             </div>
             <div class="form-group">
-              <label class="font-weight-bold">User Name <span class="text-danger">*</span></label>
-              <input type="text" name="signupusername" id="signupusername" class="form-control" placeholder="Choose your user name" required>
-              <div class="text-danger"><em>This will be your login name!</em></div>
+              <label class="font-weight-bold">Child Name <span class="text-danger">*</span></label>
+              <input type="text" formControlName="childname" name="childname" id="childname" class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.childname.errors }" required> 
+				<div *ngIf="submitted && fc.childname.errors" class="invalid-feedback">
+                            <div *ngIf="fc.childname.errors.required">Child Name is required</div>
+                        </div>
             </div>
             <div class="form-group">
-              <label class="font-weight-bold">Phone #</label>
-              <input type="text" name="signupphone" id="signupphone" class="form-control" placeholder="(000)-(0000000)">
+              <label class="font-weight-bold">Date of Birth<span class="text-danger">*</span></label>
+              <input type="date" name="dob" id="dob" class="form-control" 
+              formControlName="dob"
+              [ngClass]="{ 'is-invalid': submitted && fc.dob.errors }"
+              required>    
+              <div *ngIf="submitted && fc.dob.errors" class="invalid-feedback">
+                <div *ngIf="fc.dob.errors.required">Date of Birth is required.</div>
+            </div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold">Mobile # <span class="text-danger">*</span></label>
+              <input type="text" 
+               formControlName="mobileNumber"
+               name="mobileNumber" id="mobileNumber" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && fc.mobileNumber.errors }"
+               required>
+                 <div *ngIf="submitted && fc.mobileNumber.errors" class="invalid-feedback">
+                <div *ngIf="fc.mobileNumber.errors.required">Mobile Number is required.</div>
+                <div *ngIf="fc.mobileNumber.errors.pattern">Please, Enter 10 digit Mobile Number.</div>
+            </div>
+
             </div>
             <div class="form-group">
               <label class="font-weight-bold">Password <span class="text-danger">*</span></label>
-              <input type="password" name="signuppassword" id="signuppassword" class="form-control" placeholder="***********" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;"
+              <input type="password" formControlName="password" name="password" id="password" class="form-control" placeholder="***********" pattern="^\S{6,}$" [ngClass]="{ 'is-invalid': submitted && fc.password.errors }" 
                 required>
+             <div *ngIf="submitted && fc.password.errors" class="invalid-feedback">
+                            <div *ngIf="fc.password.errors.required">Password is required</div>
+                            <div *ngIf="fc.password.errors.minlength">Password must be at least 6 characters</div>
+                        </div>          
             </div>
             <div class="form-group">
               <label class="font-weight-bold">Confirm Password <span class="text-danger">*</span></label>
-              <input type="password" name="signupcpassword" id="signupcpassword" class="form-control" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="***********" required>
+              <input type="password" name="confirmPassword" id="confirmPassword" 
+              formControlName="confirmPassword" class="form-control" pattern="^\S{6,}$" placeholder="***********" required
+              [ngClass]="{ 'is-invalid': submitted && fc.confirmPassword.errors }" >
+
+               <div *ngIf="submitted && fc.confirmPassword.errors" class="invalid-feedback">
+                            <div *ngIf="fc.confirmPassword.errors.required">Confirm Password is required</div>
+                            <div *ngIf="fc.confirmPassword.errors.mustMatch">Passwords must match</div>
+                        </div>
             </div>
-            <div class="form-group">
-              <label><input type="checkbox" name="signupcondition" id="signupcondition" required> I agree with the <a href="javascript:;">Terms &amp; Conditions</a> for Registration.</label>
+            <div class="form-group form-check">
+              <input type="checkbox" name="signupcondition" id="signupcondition" 
+				formControlName="signupcondition"
+				class="form-check-input"
+				[ngClass]="{ 'is-invalid': submitted && fc.signupcondition.errors }"
+              	/> 
+              	<label>I agree with the <a href="javascript:;">Terms &amp; Conditions</a> for Registration.</label>
+
+               <div *ngIf="submitted && fc.signupcondition.errors" class="invalid-feedback">
+                            Select Terms and Conditions.
+                        </div>
             </div>
+             
             <div class="form-group">
               <input type="submit" name="signupsubmit" value="Sign Up" class="btn btn-block btn-primary" style="width: 40%;">
             </div>

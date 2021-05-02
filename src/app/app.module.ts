@@ -18,6 +18,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { ParentsregisterComponent } from './parentsregister/parentsregister.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AppMaterialModule } from './app-material/app-material.module';
+import { HttpModule} from '@angular/http'; 
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
     MDBBootstrapModule.forRoot(),
     FormsModule,
     BrowserAnimationsModule,
+    HttpModule,
     AppMaterialModule
   ],
 entryComponents: [HeaderComponent,LoginComponent ],
